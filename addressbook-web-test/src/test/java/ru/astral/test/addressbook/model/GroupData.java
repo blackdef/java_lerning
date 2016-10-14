@@ -1,4 +1,4 @@
-package ru.astral.test.addressbook;
+package ru.astral.test.addressbook.model;
 
 public class GroupData {
   private final String name;
