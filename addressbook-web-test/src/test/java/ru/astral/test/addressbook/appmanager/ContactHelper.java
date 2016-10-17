@@ -7,7 +7,7 @@ import ru.astral.test.addressbook.model.ContactData;
 /**
  * Created by Fedor on 16.10.2016.
  */
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
   public ContactHelper(FirefoxDriver wd) {
     super(wd);
@@ -16,6 +16,7 @@ public class ContactHelper extends HelperBase{
   public void initContactCreation() {
     click(By.linkText("add new"));
   }
+
   public void returnHomePage() {
     click(By.linkText("home page"));
   }
@@ -36,5 +37,21 @@ public class ContactHelper extends HelperBase{
     type(By.name("home"), contactData.getHome());
     type(By.name("mobile"), contactData.getMobile());
 
+  }
+
+
+  public void deleteContact() {
+    click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
+  }
+
+  public void selectContact() {
+    if (!wd.findElement(By.name("selected[]")).isSelected()) {
+      click(By.name("selected[]"));
+    }
+
+  }
+
+  public void confirmDeletion() {
+    wd.switchTo().alert().accept();
   }
 }
