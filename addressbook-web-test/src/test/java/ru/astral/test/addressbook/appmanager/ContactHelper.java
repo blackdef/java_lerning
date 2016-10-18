@@ -1,6 +1,7 @@
 package ru.astral.test.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.astral.test.addressbook.model.ContactData;
 
@@ -9,7 +10,7 @@ import ru.astral.test.addressbook.model.ContactData;
  */
 public class ContactHelper extends HelperBase {
 
-  public ContactHelper(FirefoxDriver wd) {
+  public ContactHelper(WebDriver wd) {
     super(wd);
   }
 
