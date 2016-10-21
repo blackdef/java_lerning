@@ -1,5 +1,6 @@
 package ru.astral.test.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.astral.test.addressbook.model.GroupData;
 
@@ -14,11 +15,14 @@ public class GroupModificationTests extends TestBase {
     if (!app.getGroupHelper().isthereAGroup()){
       app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test2"));
     }
+    int befor = app.getGroupHelper().getGroupCount();
     app.getGroupHelper().selectGroup();
     app.getGroupHelper().initGroupModification();
     app.getGroupHelper().fillGroupForm(new GroupData("test10", "test2", "test30"));
     app.getGroupHelper().submitGroupModification();
     app.getGroupHelper().returnToGroupPage();
+    int after = app.getGroupHelper().getGroupCount();
+    Assert.assertEquals(after,befor);
   }
 
 
