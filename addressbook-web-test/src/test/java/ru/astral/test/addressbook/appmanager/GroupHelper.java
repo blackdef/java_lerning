@@ -1,7 +1,10 @@
 package ru.astral.test.addressbook.appmanager;
 
+import org.apache.tools.ant.taskdefs.MacroInstance;
+import org.omg.CORBA.Object;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.astral.test.addressbook.model.GroupData;
 
@@ -36,9 +39,10 @@ public class GroupHelper extends HelperBase {
     click(By.name("delete"));
   }
 
-  public void selectGroup() {
-      if (!wd.findElement(By.name("selected[]")).isSelected()) {
-        click(By.name("selected[]"));
+  public void selectGroup(int index) {
+    WebElement element = wd.findElements(By.name("selected[]")).get(index);
+    if (!element.isSelected()) {
+      element.click();
       }
   }
 
