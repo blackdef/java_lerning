@@ -1,15 +1,25 @@
 package ru.astral.test.addressbook.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.astral.test.addressbook.model.ContactData;
 
-public class ContactCreateTests extends TestBase{
+import java.util.HashSet;
+import java.util.List;
 
-    @Test
-    public void testCreateContact() {
-        app.getNavigationHelper().gotoHomePage();
-        app.getContactHelper().createContact(new ContactData("test1", "test2", null, "test4", "test5", "test6", "test7", "123456", "89876543210"));
-    }
+public class ContactCreateTests extends TestBase {
+
+  @Test
+  public void testCreateContact() {
+    app.getNavigationHelper().gotoHomePage();
+    List<ContactData> befor = app.getContactHelper().getContactList();
+    ContactData contact = new ContactData("test1", "test2", "", "test4", "test5", "test6", "test7", "123456", "89876543210");
+    app.getContactHelper().createContact(contact);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), befor.size() + 1);
+
+    contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+    befor.add(contact);
+    Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(befor));
+  }
 }
