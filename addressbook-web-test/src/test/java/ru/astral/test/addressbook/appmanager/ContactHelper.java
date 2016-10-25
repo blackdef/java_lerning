@@ -2,8 +2,12 @@ package ru.astral.test.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.astral.test.addressbook.model.ContactData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Fedor on 16.10.2016.
@@ -45,9 +49,10 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
   }
 
-  public void selectContact() {
-    if (!wd.findElement(By.name("selected[]")).isSelected()) {
-      click(By.name("selected[]"));
+  public void selectContact( int index) {
+    WebElement element = wd.findElements(By.name("selected[]")).get(index);
+    if (!element.isSelected()) {
+      element.click();
     }
 
   }
@@ -73,5 +78,21 @@ public class ContactHelper extends HelperBase {
 
   public boolean isThereAContact() {
     return isElementPresent(By.name("selected[]"));
+  }
+
+  public List<ContactData> getContactList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> rows = wd.findElements(By.cssSelector("tr"));
+    rows.remove(0);
+    for (WebElement row : rows){
+      List<WebElement> cells = row.findElements(By.cssSelector("td"));
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
+      String address = cells.get(3).getText();
+      String id = cells.get(0).findElement(By.tagName("input")).getAttribute("value");
+      ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, address, null, null);
+      contacts.add(contact);
+    }
+    return contacts;
   }
 }
