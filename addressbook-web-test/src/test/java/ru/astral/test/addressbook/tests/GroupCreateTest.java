@@ -5,16 +5,19 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.astral.test.addressbook.model.GroupData;
 
+import java.util.List;
+
 
 public class GroupCreateTest extends TestBase {
 
   @Test
   public void testGroupCreate() {
     app.getNavigationHelper().gotoGroupPage();
-    int befor = app.getGroupHelper().getGroupCount();
+    List<GroupData> befor = app.getGroupHelper().getGroupList();
     app.getGroupHelper().createGroup(new GroupData("test1", "test2", "test2"));
-    int after = app.getGroupHelper().getGroupCount();
-    Assert.assertEquals(after,befor + 1);
+    List<GroupData> after = app.getGroupHelper().getGroupList();
+
+    Assert.assertEquals(after.size(),befor.size() + 1);
   }
 
 
