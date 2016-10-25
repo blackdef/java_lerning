@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
       app.getContactHelper().createContact(new ContactData("test1", "test2", null, "test4", "test5", "test6", "test7", "123456", "89876543210"));
     }
     List<ContactData> befor = app.getContactHelper().getContactList();
-    app.getContactHelper().initModification();
+    app.getContactHelper().initModification(befor.size()-1);
     ContactData contact = new ContactData(befor.get(befor.size()-1).getId(),"test10", "test20", "test30", "test40", "test50", "test60", "test70", "1234560", "898765432100");
     app.getContactHelper().fillContactInfo(contact);
     app.getContactHelper().submitContactUpdate();
