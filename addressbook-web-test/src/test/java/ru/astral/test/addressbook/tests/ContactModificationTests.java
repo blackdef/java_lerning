@@ -5,7 +5,6 @@ import org.testng.annotations.Test;
 import ru.astral.test.addressbook.model.ContactData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -13,9 +12,9 @@ import java.util.List;
  */
 public class ContactModificationTests extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testContactModification() {
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     if(! app.getContactHelper().isThereAContact()) {
       app.getContactHelper().createContact(new ContactData("test1", "test2", null, "test4", "test5", "test6", "test7", "123456", "89876543210"));
     }

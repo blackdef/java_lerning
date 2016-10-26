@@ -5,14 +5,13 @@ import org.testng.annotations.Test;
 import ru.astral.test.addressbook.model.ContactData;
 
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 
 public class ContactCreateTests extends TestBase {
 
-  @Test
+  @Test(enabled = false)
   public void testCreateContact() {
-    app.getNavigationHelper().gotoHomePage();
+    app.goTo().gotoHomePage();
     List<ContactData> befor = app.getContactHelper().getContactList();
     ContactData contact = new ContactData("test1", "test2", "", "test4", "test5", "test6", "test7", "123456", "89876543210");
     app.getContactHelper().createContact(contact);

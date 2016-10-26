@@ -8,9 +8,9 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase{
 
-    @Test
+    @Test(enabled = false)
     public void ContactDeletionTests() throws InterruptedException {
-        app.getNavigationHelper().gotoHomePage();
+        app.goTo().gotoHomePage();
         if(! app.getContactHelper().isThereAContact()) {
             app.getContactHelper().createContact(new ContactData("test1", "test2", null, "test4", "test5", "test6", "test7", "123456", "89876543210"));
         }
@@ -20,7 +20,7 @@ public class ContactDeletionTests extends TestBase{
         //Thread.sleep(1000);
         app.getContactHelper().confirmDeletion();
         //Thread.sleep(2000);
-        app.getNavigationHelper().gotoHomePage();
+        app.goTo().gotoHomePage();
         List<ContactData> after = app.getContactHelper().getContactList();
         Assert.assertEquals(after.size(), befor.size() - 1);
 
