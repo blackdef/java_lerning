@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.astral.test.addressbook.model.ContactData;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -29,7 +30,10 @@ public class ContactModificationTests extends TestBase {
 
     befor.remove(befor.size()-1);
     befor.add(contact);
-    Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(befor));
+    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId()) ;
+    befor.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(after, befor);
 
   }
 }
