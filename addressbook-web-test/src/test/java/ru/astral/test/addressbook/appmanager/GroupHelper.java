@@ -1,15 +1,14 @@
 package ru.astral.test.addressbook.appmanager;
 
-import org.apache.tools.ant.taskdefs.MacroInstance;
-import org.omg.CORBA.Object;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.astral.test.addressbook.model.GroupData;
 
-import java.util.ArrayList;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Fedor on 14.10.2016.
@@ -42,11 +41,11 @@ public class GroupHelper extends HelperBase {
     click(By.name("delete"));
   }
 
-  public void selectGroup(int index) {
-    WebElement element = wd.findElements(By.name("selected[]")).get(index);
+  private void selectGroupById(int id) {
+    WebElement element = wd.findElement(By.cssSelector("input[value = '" + id + "']"));
     if (!element.isSelected()) {
       element.click();
-      }
+    }
   }
 
   public void initGroupModification() {
@@ -64,19 +63,13 @@ public class GroupHelper extends HelperBase {
     submitGroupCreation();
     returnToGroupPage();
   }
-  public void modify(int index, GroupData group) {
-    selectGroup(index);
+  public void modify( GroupData group) {
+    selectGroupById(group.getId());
     initGroupModification();
     fillGroupForm(group);
     submitGroupModification();
     returnToGroupPage();
   }
-  public void delete(int index) {
-    selectGroup(index);
-    deleteSelectedGroup();
-    returnToGroupPage();
-  }
-
 
   public boolean isthereAGroup() {
     return isElementPresent(By.name("selected[]"));
@@ -87,8 +80,8 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public List<GroupData> list() {
-    List<GroupData> groups  = new ArrayList<GroupData>();
+  public Set<GroupData> all() {
+    Set<GroupData> groups  = new HashSet<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements){
       String name = element.getText();
@@ -97,4 +90,13 @@ public class GroupHelper extends HelperBase {
     }
     return groups;
   }
+
+  public void delete(GroupData group) {
+    selectGroupById(group.getId());
+    deleteSelectedGroup();
+    returnToGroupPage();
+
+  }
+
+
 }
