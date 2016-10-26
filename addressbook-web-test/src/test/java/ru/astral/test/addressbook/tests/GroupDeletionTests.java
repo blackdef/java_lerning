@@ -23,14 +23,14 @@ public class GroupDeletionTests extends TestBase{
         if (!app.group().isthereAGroup()){
             app.group().create(new GroupData("test1", "test2", "test2"));
         }
-        List<GroupData> befor = app.group().list();
-        int index = befor.size() - 1;
+        List<GroupData> before = app.group().list();
+        int index = before.size() - 1;
         app.group().delete(index);
         List<GroupData> after = app.group().list();
-        Assert.assertEquals(after.size(),befor.size() - 1);
+        Assert.assertEquals(after.size(),before.size() - 1);
 
-        befor.remove(index);
-        Assert.assertEquals(befor, after);
+        before.remove(index);
+        Assert.assertEquals(before, after);
 
     }
 
