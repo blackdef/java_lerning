@@ -2,42 +2,67 @@ package ru.astral.test.addressbook.model;
 
 public class ContactData {
 
-  private  int id;
-  private final String firstName;
-  private final String middleName;
-  private final String lastName;
-  private final String nickName;
-  private final String title;
-  private final String company;
-  private final String address;
-  private final String home;
-  private final String mobile;
+  private  int id = Integer.MAX_VALUE;
+  private  String firstName;
+  private  String middleName;
+  private  String lastName;
+  private  String nickName;
+  private  String title;
+  private  String company;
+  private  String address;
+  private  String home;
+  private  String mobile;
 
-  public ContactData(String firstName, String middleName, String lastName, String nickName, String title, String company, String address, String home, String mobile) {
-    this.id = Integer.MAX_VALUE;
-    this.firstName = firstName;
+
+  public ContactData withMiddleName(String middleName) {
     this.middleName = middleName;
-    this.lastName = lastName;
-    this.nickName = nickName;
-    this.title = title;
-    this.company = company;
-    this.address = address;
-    this.home = home;
-    this.mobile = mobile;
+    return this;
   }
-  public ContactData(int id, String firstName, String middleName, String lastName, String nickName, String title, String company, String address, String home, String mobile) {
+
+  public ContactData withNickName(String nickName) {
+    this.nickName = nickName;
+    return this;
+  }
+
+  public ContactData withTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
+  public ContactData withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public ContactData withHome(String home) {
+    this.home = home;
+    return this;
+  }
+
+  public ContactData withMobile(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
+  public ContactData withFirstName(String firstName) {
+    this.firstName = firstName;
+    return this;
+  }
+
+  public ContactData withLastName(String lastName) {
+    this.lastName = lastName;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withId(int id) {
     this.id = id;
-    this.firstName = firstName;
-    this.middleName = middleName;
-    this.lastName = lastName;
-    this.nickName = nickName;
-    this.title = title;
-    this.company = company;
-    this.address = address;
-    this.home = home;
-    this.mobile = mobile;
+    return this;
   }
-
 
   public String getFirstName() {
     return firstName;
@@ -79,9 +104,6 @@ public class ContactData {
     return id;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
 
   @Override
   public String toString() {

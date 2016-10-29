@@ -1,28 +1,27 @@
 package ru.astral.test.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.astral.test.addressbook.model.ContactData;
+import ru.astral.test.addressbook.model.Contacts;
 
-import java.util.Comparator;
-import java.util.List;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.testng.Assert.*;
 
 public class ContactCreateTests extends TestBase {
 
-  @Test(enabled = false)
+  @Test(enabled = true)
   public void testCreateContact() {
     app.goTo().gotoHomePage();
-    List<ContactData> before = app.getContactHelper().getContactList();
-    ContactData contact = new ContactData("test1", "test2", "", "test4", "test5", "test6", "test7", "123456", "89876543210");
-    app.getContactHelper().createContact(contact);
-    List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size() + 1);
+    Contacts before = app.contact().all();
+    ContactData contact = new ContactData().
+            withFirstName("test1").withLastName("test2").withAddress("test3").withCompany("test4").withAddress("test5").
+            withMiddleName("test6").withNickName("test7").withTitle("test8").withHome("123456").withMobile("89876543210");
+    app.contact().create(contact);
+    Contacts after = app.contact().all();
+    assertEquals(after.size(), before.size() + 1);
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
-    //contact.setId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
-    before.add(contact);
-    Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId()) ;
-    before.sort(byId);
-    after.sort(byId);
-    Assert.assertEquals(after, before);
   }
 }
