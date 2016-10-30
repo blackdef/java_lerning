@@ -57,10 +57,11 @@ public class ContactHelper extends HelperBase {
     wd.switchTo().alert().accept();
   }
 
-  public void delete(ContactData deleteContact) {
+  public void delete(ContactData deleteContact) throws InterruptedException {
     selectContactById(deleteContact);
     deleteContact();
     confirmDeletion();
+    Thread.sleep(2000);
   }
 
   public void selectContact(int index) {
@@ -114,7 +115,7 @@ public class ContactHelper extends HelperBase {
 
   public Contacts all() {
     Contacts contacts = new Contacts();
-    List<WebElement> rows = wd.findElements(By.cssSelector("tr"));
+    List<WebElement> rows = wd.findElements(By.cssSelector("table[id = 'maintable']>tbody>tr"));
     rows.remove(0);
     for (WebElement row : rows) {
       List<WebElement> cells = row.findElements(By.cssSelector("td"));
