@@ -81,8 +81,15 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void initModification(int index) {
-    wd.findElements(By.cssSelector("tr")).get(index + 1).findElements(By.cssSelector("td")).get(7).click();
+  public void initModification(ContactData contactData) {
+    wd.findElement(By.xpath("//tr/td/input[@id = '" + contactData.getId()+ "']/../../td[8]")).click();
+  }
+
+  public void modify(ContactData contact) {
+    initModification(contact);
+    fillContactInfo(contact);
+    submitContactUpdate();
+    returnHomePage();
   }
 
   public void submitContactUpdate() {
