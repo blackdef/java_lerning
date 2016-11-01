@@ -150,4 +150,8 @@ public class ContactHelper extends HelperBase {
     wd.navigate().back();
     return new ContactData().withHome(home).withMobile(mobile).withWork(work);
   }
+
+  public int count() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 }
