@@ -129,6 +129,7 @@ public class ContactHelper extends HelperBase {
     if (contactCash != null){
       return new Contacts(contactCash);
     }
+    contactCash = new Contacts();
     List<WebElement> rows = wd.findElements(By.cssSelector("table[id = 'maintable']>tbody>tr"));
     rows.remove(0);
     for (WebElement row : rows) {
