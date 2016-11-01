@@ -19,7 +19,7 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
-    app.goTo().gotoHomePage();
+    app.goTo().homePage();
     if(app.contact().all().size() == 0) {
       app.contact().create(new ContactData().
               withFirstName("test1").withLastName("test2").withAddress("test3").withCompany("test4").withAddress("test5").

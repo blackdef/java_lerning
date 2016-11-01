@@ -12,7 +12,12 @@ public class ContactData {
   private  String address;
   private  String home;
   private  String mobile;
+  private  String work;
 
+  public ContactData withWork(String work) {
+    this.work = work;
+    return this;
+  }
 
   public ContactData withMiddleName(String middleName) {
     this.middleName = middleName;
@@ -62,6 +67,10 @@ public class ContactData {
   public ContactData withId(int id) {
     this.id = id;
     return this;
+  }
+
+  public String getWork() {
+    return work;
   }
 
   public String getFirstName() {
