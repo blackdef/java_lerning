@@ -13,7 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Created by Fedor on 01.11.2016.
  */
-public class ContactPhoneTest extends TestBase {
+public class ContactInfoTest extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
@@ -28,10 +28,26 @@ public class ContactPhoneTest extends TestBase {
   @Test(enabled = true)
   public void testContactPhone(){
     ContactData contact = app.contact().all().iterator().next();
-    ContactData contactFronEditForm = app.contact().infoFromEditForm(contact);
+    ContactData contactFromEditForm = app.contact().infoFromEditForm(contact);
 
-    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactFronEditForm)));
+    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactFromEditForm)));
 
+  }
+
+  @Test
+  public void testContactAddress(){
+    ContactData contact = app.contact().all().iterator().next();
+    ContactData contactFromEditForm = app.contact().infoFromEditForm(contact);
+
+    assertThat(contact.getAddress(),equalTo(contactFromEditForm.getAddress()));
+  }
+
+  @Test
+  public void testContactEmail(){
+    ContactData contact = app.contact().all().iterator().next();
+    ContactData contactFromEditForm = app.contact().infoFromEditForm(contact);
+
+    assertThat(contact.getEmail(),equalTo(contactFromEditForm.getEmail()));
   }
 
   public static String  cleaned(String phone){
@@ -40,7 +56,7 @@ public class ContactPhoneTest extends TestBase {
 
   public String mergePhones(ContactData contact){
         return Arrays.asList(contact.getHome(), contact.getMobile(), contact.getWork()).stream().filter((s) -> !s.equals(""))
-            .map(ContactPhoneTest::cleaned).collect(Collectors.joining("\n"));
+            .map(ContactInfoTest::cleaned).collect(Collectors.joining("\n"));
 
   }
 }
