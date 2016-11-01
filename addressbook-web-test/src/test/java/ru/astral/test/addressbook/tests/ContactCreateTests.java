@@ -19,22 +19,9 @@ public class ContactCreateTests extends TestBase {
             withFirstName("test1").withLastName("test2").withAddress("test3").withCompany("test4").withAddress("test5").
             withMiddleName("test6").withNickName("test7").withTitle("test8").withHome("123456").withMobile("89876543210");
     app.contact().create(contact);
-    assertEquals(app.contact().count(), before.size() + 1);
     Contacts after = app.contact().all();
+    assertEquals(after.size(), before.size() + 1);
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
-
-  }
-  @Test(enabled = true)
-  public void testCreateBadContact() {
-    app.goTo().homePage();
-    Contacts before = app.contact().all();
-    ContactData contact = new ContactData().
-            withFirstName("test1'").withLastName("test2").withAddress("test3").withCompany("test4").withAddress("test5").
-            withMiddleName("test6").withNickName("test7").withTitle("test8").withHome("123456").withMobile("89876543210");
-    app.contact().create(contact);
-    assertEquals(app.contact().count(), before.size());
-    Contacts after = app.contact().all();
-    assertThat(after, equalTo(before));
 
   }
 }
