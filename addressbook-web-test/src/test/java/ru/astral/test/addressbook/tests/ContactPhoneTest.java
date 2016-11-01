@@ -4,6 +4,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.astral.test.addressbook.model.ContactData;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 /**
  * Created by Fedor on 01.11.2016.
  */
@@ -19,8 +25,22 @@ public class ContactPhoneTest extends TestBase {
     }
   }
 
-  @Test(enabled = false)
+  @Test(enabled = true)
   public void testContactPhone(){
+    ContactData contact = app.contact().all().iterator().next();
+    ContactData contactFronEditForm = app.contact().infoFromEditForm(contact);
+
+    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactFronEditForm)));
+
+  }
+
+  public static String  cleaned(String phone){
+    return phone.replaceAll("\\s" , "").replaceAll("[-()]","");
+  }
+
+  public String mergePhones(ContactData contact){
+        return Arrays.asList(contact.getHome(), contact.getMobile(), contact.getWork()).stream().filter((s) -> !s.equals(""))
+            .map(ContactPhoneTest::cleaned).collect(Collectors.joining("\n"));
 
   }
 }

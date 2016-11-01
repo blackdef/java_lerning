@@ -2,17 +2,19 @@ package ru.astral.test.addressbook.model;
 
 public class ContactData {
 
-  private  int id = Integer.MAX_VALUE;
-  private  String firstName;
-  private  String middleName;
-  private  String lastName;
-  private  String nickName;
-  private  String title;
-  private  String company;
-  private  String address;
-  private  String home;
-  private  String mobile;
-  private  String work;
+  private int id = Integer.MAX_VALUE;
+  private String firstName;
+  private String middleName;
+  private String lastName;
+  private String nickName;
+  private String title;
+  private String company;
+  private String address;
+  private String home;
+  private String mobile;
+  private String work;
+  private String email;
+  private String allPhones;
 
   public ContactData withWork(String work) {
     this.work = work;
@@ -69,6 +71,16 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
   public String getWork() {
     return work;
   }
@@ -113,6 +125,13 @@ public class ContactData {
     return id;
   }
 
+  public String getEmail() {
+    return email;
+  }
+
+  public String getAllPhones(){
+    return allPhones;
+  }
 
   @Override
   public String toString() {
@@ -144,4 +163,7 @@ public class ContactData {
     result = 31 * result + (address != null ? address.hashCode() : 0);
     return result;
   }
+
+
+
 }

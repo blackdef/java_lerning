@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.astral.test.addressbook.model.ContactData;
 import ru.astral.test.addressbook.model.Contacts;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -137,8 +138,11 @@ public class ContactHelper extends HelperBase {
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
       String address = cells.get(3).getText();
+      String allPhones = cells.get(5).getText();
       int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-      contactCash.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address));
+      contactCash.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname).withAddress(address)
+              .withAllPhones(allPhones));
+
     }
     return new Contacts(contactCash);
   }
@@ -147,11 +151,18 @@ public class ContactHelper extends HelperBase {
     String home = wd.findElement(By.name("home")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
-    wd.navigate().back();
-    return new ContactData().withHome(home).withMobile(mobile).withWork(work);
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String middlename = wd.findElement(By.name("middlename")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
+     wd.navigate().back();
+    return new ContactData().withHome(home).withMobile(mobile).withWork(work)
+            .withFirstName(firstname).withLastName(lastname).withMiddleName(middlename).withEmail(email);
   }
 
   public int count() {
     return wd.findElements(By.name("selected[]")).size();
   }
+
+
 }
