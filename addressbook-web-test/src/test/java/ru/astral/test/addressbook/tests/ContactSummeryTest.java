@@ -42,15 +42,19 @@ public class ContactSummeryTest extends TestBase{
     String result = Arrays.asList(contact.getFirstName(), contact.getMiddleName(),contact.getLastName())
             .stream().filter((s) -> !s.equals("")).collect(Collectors.joining(" ")) + "\n";
     result += Arrays.asList(contact.getNickName(), contact.getTitle(), contact.getCompany(), contact.getAddress())
-            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n"))+ "\n\n";
+            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n"))+ "\n";
+    if(!contact.getHome().equals("") || !contact.getMobile().equals("") || !contact.getWork().equals("") || !contact.getFax().equals(""))
+      result += "\n";
     if (!contact.getHome().equals("")) result += "H: " + contact.getHome() + "\n";
-    if (!contact.getMobile().equals("")) result = result + "M: " + contact.getMobile() + "\n";
-    if (!contact.getWork().equals("")) result = result + "W: " + contact.getWork() + "\n";
-    if (!contact.getFax().equals("")) result = result + "F: " + contact.getFax() + "\n";
+    if (!contact.getMobile().equals("")) result += "M: " + contact.getMobile() + "\n";
+    if (!contact.getWork().equals("")) result += "W: " + contact.getWork() + "\n";
+    if (!contact.getFax().equals("")) result += "F: " + contact.getFax() + "\n";
     if (!contact.getEmail().equals(""))
        result += "\n"+contact.getEmail()+ " (www." + contact.getEmail().split("[@]")[1]+ ")";
     if(!contact.getHomepage().equals(""))
-       result += "\n Homepage:\n"+ contact.getHomepage();
+       result += "\nHomepage:\n"+ contact.getHomepage();
+    if(!contact.getHomepage().equals("") || !contact.getEmail().equals(""))
+      result += "\n";
     if (!contact.getAddress2().equals(""))
       result += "\n\n"+contact.getAddress2();
     if (!contact.getPhone2().equals(""))
