@@ -40,9 +40,14 @@ public class ContactSummeryTest extends TestBase{
 
   private String mergeAllInfo(ContactData contact) {
     String result = Arrays.asList(contact.getFirstName(), contact.getMiddleName(),contact.getLastName())
-            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining(" ")) + "\n";
+            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining(" "));
+    if(!contact.getFirstName().equals("") || !contact.getMiddleName().equals("") || !contact.getLastName().equals("") )
+      result +=  "\n";
     result += Arrays.asList(contact.getNickName(), contact.getTitle(), contact.getCompany(), contact.getAddress())
-            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n"))+ "\n";
+            .stream().filter((s) -> !s.equals("")).collect(Collectors.joining("\n"));
+    if (!contact.getNickName().equals("") || !contact.getTitle().equals("") ||
+            !contact.getCompany().equals("") || !contact.getAddress().equals("") )
+      result += "\n";
     if(!contact.getHome().equals("") || !contact.getMobile().equals("") || !contact.getWork().equals("") || !contact.getFax().equals(""))
       result += "\n";
     if (!contact.getHome().equals("")) result += "H: " + contact.getHome() + "\n";
