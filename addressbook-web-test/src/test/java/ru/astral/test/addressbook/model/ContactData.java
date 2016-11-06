@@ -1,5 +1,7 @@
 package ru.astral.test.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
 
   private int id = Integer.MAX_VALUE;
@@ -22,6 +24,16 @@ public class ContactData {
   private String address2;
   private String phone2;
   private String notes;
+  private File photo;
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public ContactData withFax(String fax) {
     this.fax = fax;
@@ -220,6 +232,7 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
+    if (id != that.id) return false;
     if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
     if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
     return address != null ? address.equals(that.address) : that.address == null;
@@ -228,12 +241,10 @@ public class ContactData {
 
   @Override
   public int hashCode() {
-    int result = firstName != null ? firstName.hashCode() : 0;
+    int result = id;
+    result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     result = 31 * result + (address != null ? address.hashCode() : 0);
     return result;
   }
-
-
-
 }
