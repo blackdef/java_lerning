@@ -34,7 +34,7 @@ public class ContactCreateTests extends TestBase {
     Contacts before = app.contact().all();
     File photo = new File("src/test/resources/stru.gif");
     ContactData contact = new ContactData().
-            withFirstName("test1").withLastName("test2").withAddress("test3").withCompany("test4").withAddress("test5").
+            withFirstName("test1'").withLastName("test2").withAddress("test3").withCompany("test4").withAddress("test5").
             withMiddleName("test6").withNickName("test7").withTitle("test8").withHome("123456").withMobile("89876543210")
             .withPhoto(photo);
     app.contact().create(contact);
