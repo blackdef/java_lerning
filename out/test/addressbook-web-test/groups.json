@@ -1,0 +1,17 @@
+[
+  {
+    "name": "test 0",
+    "header": "Header test 0",
+    "footer": "Footer test 0"
+  },
+  {
+    "name": "test 1",
+    "header": "Header test 1",
+    "footer": "Footer test 1"
+  },
+  {
+    "name": "test 2",
+    "header": "Header test 2",
+    "footer": "Footer test 2"
+  }
+]
